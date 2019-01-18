@@ -35,16 +35,17 @@ export default class MessageStore extends MobxFirebaseStore {
 	
 	@action
 	loadMessage(){
-		this.fb.child('messgaes').limitToLast(FIREBASE_REF_MESSAGES_LIMIT).on('value', (snap)=> {
+		this.fb.child('messages').limitToLast(FIREBASE_REF_MESSAGES_LIMIT).on('value', (snap)=> {
 			let items = [];
 			snap.forEach((child) => {
 				items.push({
-					text: child.val().text,
+					text: child.val().text.text,
 					createdAt: child.val().createdAt,
 					user: child.val().user,
 				});
 			});
 			this.messages = items;
+			console.log("items", this.messages)
 		});
 	}
 	

@@ -44,8 +44,10 @@ export default class MessageFormComponent extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		display: 'flex',
 		flexDirection: 'row',
+		borderTopWidth: 1,
+		borderTopColor: '#cccccc',
 	},
 
 	textInputContainer: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { inject } from 'mobx-react';
 import { observer } from 'mobx-react/native';
-import { View, Text, ActivityIndicator, StatusBar, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, AsyncStorage, StatusBar, StyleSheet } from 'react-native';
 import color from '../feature/color';
 
 @inject("store")
@@ -15,8 +15,10 @@ export default class AuthLoadingScreen extends Component {
 
 	_bootstrapAsync = async () => {
 		console.log("Authed User", firebase.auth().currentUser)
+		const userToken = await AsyncStorage.getItem('userToken');
 	
-		this.props.navigation.navigate((false)? 'Main' : 'Login');
+		//this.props.navigation.navigate((false)? 'Main' : 'Login');
+		this.props.navigation.navigate(userToken ? 'Main' : 'Login');
 	};
 
 	render(){

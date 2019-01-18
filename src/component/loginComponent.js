@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
 	textInputContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		marginTop: '5%',
 	},
 
 	buttonContainer: {
@@ -127,13 +128,12 @@ const styles = StyleSheet.create({
 		color: '#616161',
 	},
 	textInput: {
-		fontSize: 25,
+		fontSize: 30,
 		lineHeight: 40,
-		width: 300,
-		height: 40,
+		width: 320,
+		height: 45,
 		backgroundColor: color.dark,
 		borderRadius: 5,
-		marginTop: '5%',
 		paddingLeft: 10,
 	},
 })
