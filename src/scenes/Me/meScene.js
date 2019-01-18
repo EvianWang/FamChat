@@ -38,20 +38,32 @@ export default class MeScreen extends Component {
 		Alert.alert('Thank you!:) Glad that you like it!!')
 	}
 
+	moreInfo(){
+		Alert.alert('Check out https://github.com/EvianWang/FamChat')
+	}
+
+	userInfo(){
+		const email = firebase.auth().currentUser.email
+		Alert.alert(email)
+	}
+
 	render(){
 		const { auth } = this.props.store
 		let username = firebase.auth().currentUser.email.split('@')[0];
 		return (
 			<View style={{backgroundColor: color.primary, flex:1}}>
 				<View style={styles.container}>
-					<View style={styles.userInfoView}>
-						<Image
-							style={styles.iconStyle}
-							source={require('../../images/user.png')}
-						/>
-						<Text style={styles.infoText}>
-							{'Username:  ' + username}
-						</Text>
+					<View style={styles.infoView}>
+						<TouchableOpacity 
+							onPress={this.userInfo.bind(this)}>
+							<View style={styles.buttonContainer}>
+								<Image
+									style={styles.iconStyle}
+									source={require('../../images/user.png')}
+								/>
+								<Text style={styles.infoText}>{'Username: ' + username}</Text>
+							</View>
+						</TouchableOpacity>
 					</View>
 					<View style={styles.infoView}>
 						<TouchableOpacity 
@@ -62,6 +74,18 @@ export default class MeScreen extends Component {
 									source={require('../../images/like.png')}
 								/>
 								<Text style={styles.infoText}>{'Like this app'}</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+					<View style={styles.infoView}>
+						<TouchableOpacity 
+							onPress={this.moreInfo.bind(this)}>
+							<View style={styles.buttonContainer}>
+								<Image
+									style={styles.iconStyle}
+									source={require('../../images/info.png')}
+								/>
+								<Text style={styles.infoText}>{'More about this app'}</Text>
 							</View>
 						</TouchableOpacity>
 					</View>
@@ -148,5 +172,5 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},
-	
+
 });
