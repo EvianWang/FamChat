@@ -40,6 +40,15 @@ export default class MessagesListComponent extends Component {
 				</View>
 			)
 		}
+
+		this.emptyList = () => {
+	      return (
+	        <Text
+	          style={styles.placeholder}>
+	          No Message.
+	        </Text>
+	      )
+	    }
 	}
 	
 	componentDidMount(){
@@ -47,14 +56,6 @@ export default class MessagesListComponent extends Component {
 		message.loadMessage()
 	}
 	
-	/*
-	componentDidUpdate(){
-		const { message } = this.props.store
-		if(message.messages.length){
-			this.flatList.scrollToIndex({animated:true, index:0});
-		}
-	}
-	*/
 
 	render(){
 		const { auth } = this.props.store
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
 	},
 	
 	placeholder: {
-    fontSize: 16,
+    fontSize: 25,
     color: 'grey',
     textAlign: 'center'
 	},

@@ -17,11 +17,12 @@ export default class MessageFormComponent extends Component {
 
 	addMessage(){
 		const { message } = this.props.store
-		message.addMessage({text: this.messageText})
+		this.messageText == '' ? {} : message.addMessage({text: this.messageText})
 	}
 
 	render(){
 		const { auth } = this.props.store
+
 		return(
 			<View style={styles.container}>
 				<TextInput
@@ -31,7 +32,7 @@ export default class MessageFormComponent extends Component {
 				/>
 				<TouchableOpacity
 					style={{flex: 1}}
-					onPress={this.addMessage.bind(this)} >
+					onPress={this.addMessage.bind(this)}>
 					<Image
           				style={{width: 40, height: 40}}
           				source={require('../../../images/icons8-paper-plane-30.png')}
