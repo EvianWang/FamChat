@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity,Platform } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity, Platform, Image, Alert } from "react-native";
 import { inject } from 'mobx-react';
 import color from '../../feature/color';
+import firebase from 'firebase';
 
 @inject("store")
 
@@ -33,11 +34,38 @@ export default class MeScreen extends Component {
 			})
 	}
 
+	like(){
+		Alert.alert('Thank you!:) Glad that you like it!!')
+	}
+
 	render(){
 		const { auth } = this.props.store
+		let username = firebase.auth().currentUser.email.split('@')[0];
 		return (
 			<View style={{backgroundColor: color.primary, flex:1}}>
-				<Text>I am MeScreen!</Text>
+				<View style={styles.container}>
+					<View style={styles.userInfoView}>
+						<Image
+							style={styles.iconStyle}
+							source={require('../../images/user.png')}
+						/>
+						<Text style={styles.infoText}>
+							{'Username:  ' + username}
+						</Text>
+					</View>
+					<View style={styles.infoView}>
+						<TouchableOpacity 
+							onPress={this.like.bind(this)}>
+							<View style={styles.buttonContainer}>
+								<Image
+									style={styles.iconStyle}
+									source={require('../../images/like.png')}
+								/>
+								<Text style={styles.infoText}>{'Like this app'}</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+				</View>
 				<View style={styles.tabBarInfoContainer}>
 					<TouchableOpacity onPress={this.signOut.bind(this)}>
 						<Text style={styles.tabBarInfoText}>Logout</Text>
@@ -49,6 +77,14 @@ export default class MeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	    padding: 8,
+	    flexDirection: 'column',
+	    backgroundColor: color.primary,
+	    borderRadius: 5
+	},
+
 	tabBarInfoContainer: {
 		position: 'absolute',
 		bottom: 0,
@@ -69,9 +105,48 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fbfbfb',
 		paddingVertical: 20,
 	},
+
 	tabBarInfoText: {
 		fontSize: 17,
 		color: 'rgba(96,100,109,1)',
 		textAlign: 'center',
 	},
+
+	userInfoView: {
+		flexDirection: 'row',
+	    backgroundColor: color.light,
+	    borderRadius: 5,
+	    padding: 3,
+	    height: 45,
+	},
+
+	infoView: {
+	    backgroundColor: color.light,
+	    borderRadius: 5,
+	    padding: 3,
+	    height: 45,
+	    marginTop: '2%',
+	},
+
+	iconStyle: {
+		width: 30,
+		height: 30,
+		marginLeft: 8,
+		marginTop: 3,
+	},
+
+	infoText: {
+	    flex: 1,
+	    color: '#616161',
+	    fontSize: 20,
+	    fontWeight: 'bold',
+	    paddingLeft: 16,
+	    marginTop:5,
+  	},
+
+  	buttonContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+	},
+	
 });
